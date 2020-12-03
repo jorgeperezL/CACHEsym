@@ -10,6 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct {
 	short int ETQ;
@@ -17,6 +18,8 @@ typedef struct {
 }T_LINEA_CACHE;
 
 
+int converBinDec(char bin);
+void leerTxt(unsigned char * RAM,T_LINEA_CACHE array);
 
 int tiempoglobal = 0;
 int numfallos = 0;
@@ -33,15 +36,36 @@ int main(int argc, char * argv[])
 		}
 	}
 
+	unsigned char RAM[1024];
 
+	FILE *fp;
 
+	fp = fopen("RAM.bin","rb");
 
+	if (fp==NULL)
+		{
+		perror ("Error al abrir RAM.bin");
+				exit(-1);
+		}
+
+	fread(RAM,sizeof(RAM),1,fp);
+
+	fclose (fp);
+
+	leerTxt(RAM,array);
 
 	return 0;
 };
 
 
-void leerTxt(){
+
+void leerTxt(unsigned char * RAM,T_LINEA_CACHE array){
+
+	for(int j =0; j < 1024; j++){
+				printf("%d\n",RAM[j]);
+			}
+
+
 			FILE *fp;
 
 		 	char buffer[100];
@@ -56,35 +80,17 @@ void leerTxt(){
 
 		 	while(!feof(fp)){
 		 	fscanf(fp, "%s" ,buffer);
+
+
 		 	}
 		 	fclose ( fp );
 }
 
-void leerBin(){
-
-			unsigned char buffer[1024];
-			FILE *fp;
-
-			fp = fopen("RAM.bin","rb");
-
-			if (fp==NULL)
-			{
-				perror ("Error al abrir RAM.bin");
-				exit(-1);
-			}
-
-			fread(buffer,sizeof(buffer),1,fp);
-
-			fclose (fp);
-
-}
 
 int converBinDec(char bin){
 	int dec = 0;
-
 	while (bin != '\n') {
 	if (bin == '1') dec = dec * 2 + 1;
 	else if (bin == '0') dec *= 2; }
-
 	return dec;
 }
