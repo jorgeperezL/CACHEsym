@@ -61,8 +61,9 @@ void resumen(){
 	printf("Texto: ");
 	for(int i = 0 ; i < num_addr ; i++){
 	printf("%c ", texto[i]);
-	printf("\n");
+
 	}
+	printf("\n");
 }
 
 //incializar variables ETQ a FF y Datos a 0
