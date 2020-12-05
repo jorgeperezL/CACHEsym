@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #define BIT_0 0
 #define BIT_1 1
@@ -60,6 +61,7 @@ void resumen(){
 	printf("Texto: ");
 	for(int i = 0 ; i < num_addr ; i++){
 	printf("%c ", texto[i]);
+	printf("\n");
 	}
 }
 
